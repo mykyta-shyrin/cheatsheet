@@ -35,7 +35,7 @@
 
 (defun cheatsheet-add (&rest cheat)
   "Add CHEAT to cheatsheet."
-    (add-to-list 'cheatsheet-cheat-list cheat))
+  (add-to-list 'cheatsheet-cheat-list cheat))
 
 (defun cheatsheet-cheat-groups ()
   "Get all groups, submitted to cheatsheet."
@@ -45,26 +45,18 @@
 
 (defun cheatsheet-get-group (group)
   "Get group struct with all cheats, belonging to GROUP."
-  (let* ((is-group (lambda (group cheat)
-                     (if (string= (cheatsheet-cheat-group cheat) group)
-                         cheat
-                       nil)))
-         (filter-group (apply-partially is-group group)))
-    (delq nil (mapcar filter-group cheatsheet-cheat-list))))
+  (cl-flet ((is-group (cheat)
+                      (if (string= (cheatsheet-cheat-group cheat) group)
+                          cheat
+                        nil)))
+    (delq nil (mapcar #'is-group cheatsheet-cheat-list))))
 
 (defun cheatsheet-get ()
   "Get cheatsheet as list of group structs, keeping defining order."
-  (let ((make-group (lambda (group)
-                      (list :name group
-                            :cheats (cheatsheet-get-group group)))))
-    (mapcar make-group (cheatsheet-cheat-groups))))
-
-(defun cheatsheet-cheat-format (cheat)
-  "Get formatted CHEAT."
-  (let ((key (plist-get cheat :key))
-        (description (plist-get cheat :description)))
-    (format " : %s\t\t\t- %s\n"
-            key description)))
+  (cl-flet ((make-group (group)
+                        (list :name group
+                              :cheats (cheatsheet-get-group group))))
+    (mapcar #'make-group (cheatsheet-cheat-groups))))
 
 (defun cheatsheet-group-print (group)
   "Print GROUP of cheats."
@@ -96,7 +88,7 @@
            (format-string (format " : %%%ds - %%s\n" key-cell-length))
            (format-cheat (apply-partially #'format-cheat format-string))
            (formatted-cheats (apply 'concat (mapcar format-cheat cheats))))
-      (concat name "\n" formatted-cheats))))
+      (concat name "\n" formatted-cheats "\n"))))
 
 
 (cheatsheet-add :group 'Common :key ":q" :description "leave Emacs.")

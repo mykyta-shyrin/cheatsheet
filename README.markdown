@@ -35,7 +35,11 @@ Command to add a new cheat to your cheatsheet
 
 # cheatsheet-get
 Command to get current cheatsheet as list of groups, keeping defining order.
-* Cheat is a plist that looks like this `[:group :key :description]`. :group, :key, :description are symbols or strings
-* Group is a plist that looks like this `[:name :cheats]`. :name is a symbol or string, :cheats is a list of CHEATs
+* Cheat is a plist that looks like this `[:group :key :description]`. `:group`, `:key`, `:description` are symbols or strings
+* Group is a plist that looks like this `[:name :cheats]`. `:name` is a symbol or string, `:cheats` is a list of CHEATs
 * Cheatsheet is a list of GROUPs - result of `cheatsheet-get` command
 
+# cheatsheet-show
+Show buffer with your cheatsheet. Can be closed via `C-q` key.
+
+Enjoy using cheatsheet.el

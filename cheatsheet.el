@@ -1,7 +1,28 @@
-;;; cheatsheet --- helps you to create your own customized cheatsheet
+;;; cheatsheet.el --- helps you to create your own cheatsheet and start using emacs plugins without learning keys
+
+;; Copyright (C) 2015 Shirin Nikita
+;;
+;; Author: Shirin Nikita <shirin.nikita@gmail.com>
+;; URL: http://github.com/darksmile/cheatsheet/
+;; Package-Requires: ((emacs "24"))
+;; Version: 1.0
+;; Keywords: convenience, usability
+
+;; This file is not part of GNU Emacs
+
+;;; Licence:
+
+;; Licensed under the same terms as Emacs.
 
 ;;; Commentary:
-;;; Will add
+
+;; Quick start:
+;; Load package
+;; Add your first cheat:
+;; (cheatsheet-add :group 'Common
+;;                 :key "C-x C-c"
+;;                 :description "leave Emacs.")
+;; Run (cheatsheet-show) and enjoy looking at your own Emacs cheatsheet.
 
 ;;; Code:
 
@@ -15,11 +36,16 @@
   '(:foreground "orange")
   "Cheat key font face.")
 
+(defconst cheatsheet--keymap
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-q") 'kill-buffer-and-window)
+    map))
+
 
 (defvar cheatsheet--cheat-list '()
   "List of cheats.")
 
-
+;; Getters for CHEAT and GROUP plists
 (defun cheatsheet--if-symbol-to-string (string-like)
   "Convert STRING-LIKE to string."
   (if (symbolp string-like) (symbol-name string-like) string-like))
@@ -44,10 +70,7 @@
   "Get CHEAT description."
   (cheatsheet--if-symbol-to-string (plist-get cheat :description)))
 
-(defun cheatsheet-add (&rest cheat)
-  "Add CHEAT to cheatsheet."
-  (add-to-list 'cheatsheet--cheat-list cheat))
-
+;; Functions to get data from CHEATSHEET in convenient format
 (defun cheatsheet--cheat-groups ()
   "Get all groups, submitted to cheatsheet."
   (reverse (delete-dups
@@ -63,34 +86,7 @@
                                 nil)))
     (delq nil (mapcar #'is-current-group cheatsheet--cheat-list))))
 
-(defun cheatsheet-get ()
-  "Get cheatsheet as list of group structs, keeping defining order."
-  (cl-flet ((make-group (group)
-                        (list :name group
-                              :cheats (cheatsheet--get-group group))))
-    (mapcar #'make-group (cheatsheet--cheat-groups))))
-
-(defun cheatsheet--format ()
-  "Print the whole cheatsheet."
-  (let* ((cheatsheet (cheatsheet-get))
-         (formatted-groups (mapcar 'cheatsheet--format-group cheatsheet))
-         (formatted-cheatsheet (apply 'concat formatted-groups)))
-    formatted-cheatsheet))
-
-(defun cheatsheet-show ()
-  "Create buffer and show cheatsheet."
-  (interactive)
-  (cl-flet ((get-local-keymap
-             ()
-             (let ((keymap (make-keymap)))
-               (define-key keymap (kbd "C-q") 'kill-buffer-and-window)
-               keymap)))
-    (switch-to-buffer-other-window "*cheatsheet*")
-    (use-local-map (get-local-keymap))
-    (erase-buffer)
-    (insert (cheatsheet--format))
-    (setq buffer-read-only t)))
-
+;; Functions to format cheatsheet items and prepare to print
 (defun cheatsheet--format-cheat (cheat key-cell-length)
   "Format CHEAT row with KEY-CELL-LENGTH key cell length."
   (let* ((format-string (format "%%%ds - %%s\n" key-cell-length))
@@ -114,12 +110,33 @@
            (faced-group-name (propertize name 'face cheatsheet--group-face)))
       (concat faced-group-name "\n" formatted-cheats "\n"))))
 
+(defun cheatsheet--format ()
+  "Print the whole cheatsheet."
+  (let* ((cheatsheet (cheatsheet-get))
+         (formatted-groups (mapcar 'cheatsheet--format-group cheatsheet))
+         (formatted-cheatsheet (apply 'concat formatted-groups)))
+    formatted-cheatsheet))
 
-(cheatsheet-add :group 'Common :key ":q" :description "leave Emacs.")
-(cheatsheet-add :group 'Common :key "M-x buffer-menu" :description "select buffer to show in current frame.")
-(cheatsheet-add :group 'Common :key "M-:" :description "eval expression.")
-(cheatsheet-add :group 'Project :key "C-x C-f" :description "open file.")
-(cheatsheet-add :group 'Project :key "C-c p f" :description "find file.")
-(cheatsheet-add :group 'Project :key "C-c p s g" :description "search file.")
+;; Interface
+(defun cheatsheet-add (&rest cheat)
+  "Add CHEAT to cheatsheet."
+  (add-to-list 'cheatsheet--cheat-list cheat))
 
+(defun cheatsheet-get ()
+  "Get cheatsheet as list of group structs, keeping defining order."
+  (cl-flet ((make-group (group)
+                        (list :name group
+                              :cheats (cheatsheet--get-group group))))
+    (mapcar #'make-group (cheatsheet--cheat-groups))))
+
+(defun cheatsheet-show ()
+  "Create buffer and show cheatsheet."
+  (interactive)
+  (switch-to-buffer-other-window "*cheatsheet*")
+  (use-local-map cheatsheet--keymap)
+  (erase-buffer)
+  (insert (cheatsheet--format))
+  (setq buffer-read-only t))
+
+(provide 'cheatsheet)
 ;;; cheatsheet.el ends here

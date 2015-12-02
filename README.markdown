@@ -42,4 +42,4 @@ Command to get current cheatsheet as list of groups, keeping defining order.
 # cheatsheet-show
 Show buffer with your cheatsheet. Can be closed via `C-q` key.
 
-Enjoy using cheatsheet.el
+# Enjoy using cheatsheet.el

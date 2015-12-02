@@ -22,4 +22,20 @@ All this problems can be solved using cheatsheet.el
                 :key "C-x C-c"
                 :description "leave Emacs.")
 ```
-* Run (cheatsheet-show) and enjoy :-)
+* Run `(cheatsheet-show)` and enjoy :-)
+
+## Plugin API
+# cheatsheet-add
+Command to add a new cheat to your cheatsheet
+```
+(cheatsheet-add :group 'Common
+                :key "C-x C-c"
+                :description "leave Emacs.")
+```
+
+# cheatsheet-get
+Command to get current cheatsheet as list of groups, keeping defining order.
+* Cheat is a plist that looks like this `[:group :key :description]`. :group, :key, :description are symbols or strings
+* Group is a plist that looks like this `[:name :cheats]`. :name is a symbol or string, :cheats is a list of CHEATs
+* Cheatsheet is a list of GROUPs - result of `cheatsheet-get` command
+

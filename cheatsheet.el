@@ -118,6 +118,7 @@
     formatted-cheatsheet))
 
 ;; Interface
+;;;###autoload
 (defun cheatsheet-add (&rest cheat)
   "Add CHEAT to cheatsheet."
   (add-to-list 'cheatsheet--cheat-list cheat))
@@ -129,6 +130,7 @@
                               :cheats (cheatsheet--get-group group))))
     (mapcar #'make-group (cheatsheet--cheat-groups))))
 
+;;;###autoload
 (defun cheatsheet-show ()
   "Create buffer and show cheatsheet."
   (interactive)

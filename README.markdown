@@ -10,6 +10,8 @@ Why I've created this plugin:
 
 All this problems can be solved using cheatsheet.el
 
+![](https://github.com/darksmile/cheatsheet/blob/master/emacs-cheatsheet.png)
+
 ## Getting started
 * Get cheatsheet.el
   * Hopefully, will be available via MELPA

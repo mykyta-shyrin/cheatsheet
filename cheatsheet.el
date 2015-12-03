@@ -1,8 +1,8 @@
 ;;; cheatsheet.el --- create your own cheatsheet
 
-;; Copyright (C) 2015 Shirin Nikita
+;; Copyright (C) 2015 Shirin Nikita and contributors
 ;;
-;; Author: Shirin Nikita <shirin.nikita@gmail.com>
+;; Author: Shirin Nikita <shirin.nikita@gmail.com> and contributors
 ;; URL: http://github.com/darksmile/cheatsheet/
 ;; Package-Requires: ((emacs "24") (cl-lib "0.5"))
 ;; Version: 1.0

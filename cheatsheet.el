@@ -1,4 +1,4 @@
-;;; cheatsheet.el --- helps you to create your own cheatsheet and start using emacs plugins without learning keys
+;;; cheatsheet.el --- create your own cheatsheet
 
 ;; Copyright (C) 2015 Shirin Nikita
 ;;

@@ -1,3 +1,5 @@
+[![MELPA](https://melpa.org/packages/cheatsheet-badge.svg)](https://melpa.org/#/cheatsheet)
+
 ## Cheatsheet.el
 
 Cheatsheet.el is a tool for creating your own Emacs cheatsheet.
@@ -14,7 +16,7 @@ All this problems can be solved using cheatsheet.el
 
 ## Getting started
 * Get cheatsheet.el
-  * Hopefully, will be available via MELPA
+  * Hopefully, will be available via [MELPA](https://melpa.org/#/cheatsheet)
   * Manually download cheatsheet.el and set-up your load path.
     [Find out more.](http://www.emacswiki.org/emacs/InstallingPackages)
 * Load package - (require 'cheatsheet)

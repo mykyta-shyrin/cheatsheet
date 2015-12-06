@@ -16,7 +16,7 @@ All this problems can be solved using cheatsheet.el
 
 ## Getting started
 * Get cheatsheet.el
-  * Hopefully, will be available via [MELPA](https://melpa.org/#/cheatsheet)
+  * Via [MELPA](https://melpa.org/#/cheatsheet)
   * Manually download cheatsheet.el and set-up your load path.
     [Find out more.](http://www.emacswiki.org/emacs/InstallingPackages)
 * Load package - (require 'cheatsheet)

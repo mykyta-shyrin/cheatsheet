@@ -48,4 +48,4 @@ Show buffer with your cheatsheet. Can be closed via `C-q` key.
 
 # Enjoy using cheatsheet.el
 
-P.S. Thanks @rmuslimov for code review and elisp help!
+P.S. Thanks [@rmuslimov](https://github.com/rmuslimov) for code review and elisp help!

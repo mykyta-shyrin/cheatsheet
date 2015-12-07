@@ -46,6 +46,6 @@ Command to get current cheatsheet as list of groups, keeping defining order.
 # cheatsheet-show
 Show buffer with your cheatsheet. Can be closed via `C-q` key.
 
-### Thanks @rmuslimov for code review and elisp help!
+Thanks @rmuslimov for code review and elisp help!
 
 # Enjoy using cheatsheet.el

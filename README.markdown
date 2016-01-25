@@ -4,7 +4,7 @@
 
 Cheatsheet.el is a tool for creating your own Emacs cheatsheet.
 Why I've created this plugin:
-* I want to start using new plugin without learning keys - cheatsheet.el lets you to defne keys you want to be able to find quickly
+* I want to start using new plugin without learning keys - cheatsheet.el lets you to define keys you want to be able to find quickly
 * I don't need to see all keys, defined in different keymaps
 * I don't need to see all keys, defined in any plugin
 * I want to write my own key description

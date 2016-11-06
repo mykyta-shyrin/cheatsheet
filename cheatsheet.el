@@ -36,11 +36,6 @@
   '(:foreground "orange")
   "Cheat key font face.")
 
-(defconst cheatsheet--keymap
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-q") 'kill-buffer-and-window)
-    map))
-
 
 (defvar cheatsheet--cheat-list '()
   "List of cheats.")
@@ -135,10 +130,15 @@
   "Create buffer and show cheatsheet."
   (interactive)
   (switch-to-buffer-other-window "*cheatsheet*")
-  (use-local-map cheatsheet--keymap)
+  (cheatsheet-mode)
   (erase-buffer)
   (insert (cheatsheet--format))
   (setq buffer-read-only t))
+
+(define-derived-mode cheatsheet-mode fundamental-mode "Cheat Sheet"
+  "Set major mode for viewing cheat sheets.")
+
+(define-key cheatsheet-mode-map (kbd "C-q") 'kill-buffer-and-window)
 
 (provide 'cheatsheet)
 ;;; cheatsheet.el ends here

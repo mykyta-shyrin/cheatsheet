@@ -125,6 +125,9 @@
                               :cheats (cheatsheet--get-group group))))
     (mapcar #'make-group (cheatsheet--cheat-groups))))
 
+(defun cheatsheet-add-group (group &rest cheats)
+  (mapcar '(lambda (cheat) (append `(:group ,group) cheat)) cheats))
+
 ;;;###autoload
 (defun cheatsheet-show ()
   "Create buffer and show cheatsheet."

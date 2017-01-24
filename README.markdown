@@ -21,7 +21,7 @@ All this problems can be solved using cheatsheet.el
     [Find out more.](http://www.emacswiki.org/emacs/InstallingPackages)
 * Load package - (require 'cheatsheet)
 * Add your first cheat:
-```
+```elisp
 (cheatsheet-add :group 'Common
                 :key "C-x C-c"
                 :description "leave Emacs.")
@@ -30,13 +30,20 @@ All this problems can be solved using cheatsheet.el
 
 ## Plugin API
 # cheatsheet-add
-Command to add a new cheat to your cheatsheet
-```
+Command to add a new cheat to your cheatsheet.
+```elisp
 (cheatsheet-add :group 'Common
                 :key "C-x C-c"
                 :description "leave Emacs.")
 ```
 
+# cheatsheet-add-group
+Command to add cheats to the same group.
+```elisp
+(cheatsheet-add-group 'Common
+                      '(:key "C-x C-c" :description "leave Emacs")
+                      '(:key "C-x C-f" :description "find file"))
+```
 # cheatsheet-get
 Command to get current cheatsheet as list of groups, keeping defining order.
 * Cheat is a plist that looks like this `[:group :key :description]`. `:group`, `:key`, `:description` are symbols or strings

@@ -125,8 +125,13 @@
                               :cheats (cheatsheet--get-group group))))
     (mapcar #'make-group (cheatsheet--cheat-groups))))
 
+;;;###autoload
 (defun cheatsheet-add-group (group &rest cheats)
-  (mapcar '(lambda (cheat) (append `(:group ,group) cheat)) cheats))
+  "Add cheats to the same group."
+  (mapcar #'(lambda (cheat)
+              (apply 'cheatsheet-add
+                     (append `(:group ,group) cheat)))
+          cheats))
 
 ;;;###autoload
 (defun cheatsheet-show ()

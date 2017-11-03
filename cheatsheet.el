@@ -141,6 +141,7 @@
   (cheatsheet-mode)
   (erase-buffer)
   (insert (cheatsheet--format))
+  (beginning-of-buffer)
   (setq buffer-read-only t))
 
 (define-derived-mode cheatsheet-mode fundamental-mode "Cheat Sheet"
